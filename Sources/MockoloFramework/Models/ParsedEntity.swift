@@ -119,6 +119,7 @@ public enum CombineType {
 /// Contains arguments to annotation
 /// e.g. @mockable(module: prefix = Foo; typealias: T = Any; U = String; rx: barStream = PublishSubject; history: bazFunc = true; modifiers: someVar = weak; combine: fooPublisher = CurrentValueSubject; otherPublisher = @Published otherProperty)
 struct AnnotationMetadata {
+    var objectType: ObjectType?
     var module: String?
     var typeAliases: [String: String]?
     var varTypes: [String: String]?
@@ -171,6 +172,11 @@ public final class Entity {
         self.metadata = metadata
         self.isProcessed = isProcessed
     }
+}
+
+enum ObjectType: String {
+    case `class` = "class"
+    case `actor` = "actor"
 }
 
 enum Modifier: String {
