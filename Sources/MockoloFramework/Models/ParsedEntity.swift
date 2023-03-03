@@ -59,9 +59,9 @@ struct ResolvedEntity {
 
 
     func model() -> Model {
-        let objectType = entity.metadata?.objectType
+        let objectType = entity.metadata?.objectType ?? (entity.entityNode.inheritedTypes.contains(.actorProtocol) ? .actor : .class)
         switch objectType {
-        case .class, .none:
+        case .class:
             return ClassModel(identifier: key,
                               acl: entity.entityNode.accessLevel,
                               declType: entity.entityNode.declType,
